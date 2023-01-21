@@ -26,9 +26,7 @@ const Map = () => {
     "/api/coordinates",
     fetcher
   );
-  // console.log(error);
 
-  // TODO: Nicer loading experience, maybe suspense
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
 
