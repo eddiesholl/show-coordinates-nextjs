@@ -28,7 +28,7 @@ const Map = () => {
     type: "Feature",
     geometry: {
       type: "Point",
-      coordinates: [c.lat, c.long],
+      coordinates: [c.long, c.lat],
     },
     properties: {},
   }));
@@ -57,7 +57,7 @@ const Map = () => {
       initialViewState={{
         bounds: [minLong, minLat, maxLong, maxLat],
         fitBoundsOptions: {
-          padding: 40,
+          padding: 100,
         },
       }}
       style={{ width: 600, height: 400 }}

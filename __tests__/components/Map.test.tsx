@@ -23,8 +23,8 @@ describe("Map", () => {
     expect(MockMap).toHaveBeenCalledWith(
       expect.objectContaining({
         initialViewState: {
-          bounds: [1, 2, 3, 4],
-          fitBoundsOptions: { padding: 40 },
+          bounds: [2, 1, 4, 3],
+          fitBoundsOptions: { padding: 100 },
         },
       })
     );
