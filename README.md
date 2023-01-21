@@ -4,7 +4,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Next, run the development server:
 
 ```bash
 npm run dev
@@ -15,6 +21,12 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+To run the tests:
+
+```bash
+npm run test
+```
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
@@ -45,6 +57,16 @@ A mapping client API like `mapbox` is likely to work most easily with commonly u
 
 Once this has been translated to `geoJSON` on the client, it makes it easier to call on other tools in the ecosystem, like `@turf/bbox`
 
+## Extensions
+
+There's a few things I had in my mind I would have liked to add, or would make the demo a little nicer or more fun:
+
+- Add API parameters so the client can choose how many points, or the bounding box
+- Add user controls to exersize those API parameters, or just pluck the params off the browser URL used
+- Show some details when you click on each marker
+- A button to regenerate fresh markers
+- The Next.js and Vercel ecosystem offers very simple [deployment](https://nextjs.org/docs/deployment#managed-nextjs-with-vercel), it would be easy to get a copy of the demo app running.
+
 ## Known issues
 
-After messing around for a while, the `mapbox` instance is not fully and cleanly mocked when the `Map` component is rendered in a test. Some options are to mock one layer higher up, at the `react-map-gl` dependency level, or to yank a copy of a full mapbox [mock](https://github.com/visgl/react-map-gl/tree/master/test/src/utils/mapbox-gl-mock)
+After messing around for a while, the `mapbox` instance is not fully and cleanly mocked when the `Map` component is rendered in a test. It generates some runtime error output on the test console. Some options are to mock one layer higher up, at the `react-map-gl` dependency level, or to yank a copy of a full mapbox [mock](https://github.com/visgl/react-map-gl/tree/master/test/src/utils/mapbox-gl-mock)
