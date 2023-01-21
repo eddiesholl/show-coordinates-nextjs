@@ -18,11 +18,10 @@
   font-family: var(--font-mono);
 }
 
-.description a {
+.description span {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .description p {
@@ -97,7 +96,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
@@ -125,7 +124,7 @@
 
 .thirteen::before,
 .thirteen::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }
