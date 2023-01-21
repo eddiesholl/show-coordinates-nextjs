@@ -27,3 +27,20 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## Background
 
 This is a full stack demo app built on next.js, with the goal of showing a set of coordinates in a map, displayed in a simple react web client.
+
+With the basic requirements describing a single API endpoint, plus a react client to read from it, the streamlined workflow with next.js felt like a great fit.
+
+| Requirement                                       | Detail                                                                                                            |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Single express API endpoint                       | ✅ Implemented via a next.js handler in `api/coordinates.ts`, so it's a thin wrapper on top of an express request |
+| Generates a number of random geometry coordinates | ✅ The endpoint returns an array of random coordinate objects                                                     |
+| Points are within a bounding box                  | ✅                                                                                                                |
+| Simple react client                               | ✅ React pages and components built via next.js conventions                                                       |
+| Code is clear and documented                      | -                                                                                                                 |
+| Code is well tested                               | -                                                                                                                 |
+
+### Location and data formats
+
+A mapping client API like `mapbox` is likely to work most easily with commonly used data formats, like `geoJSON`. I initially started with the API endpoint returning a `FeatureCollection`, but these particular requirements specifically ask for a simpler format to be used for the locations they return.
+
+Once this has been translated to `geoJSON` on the client, it makes it easier to call on other tools in the ecosystem, like `@turf/bbox`
