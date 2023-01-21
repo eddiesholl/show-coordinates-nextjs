@@ -1,9 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import mapboxgl from "mapbox-gl";
-import "@/styles/Map.module.css";
+import MapWrapper, { Marker } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-// REVISIT: Mapbox demo access token. Extract so it can be supplied at compile time
-mapboxgl.accessToken =
+const token =
   "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
 
 const locations = {
@@ -22,35 +20,20 @@ const locations = {
   ],
 };
 const Map = () => {
-  const mapContainerRef = useRef(null);
-
-  // Initialize map when component mounts
-  useEffect(() => {
-    if (mapContainerRef.current === null) {
-      return;
-    }
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-87.65, 41.84],
-      zoom: 10,
-    });
-
-    // Create default markers
-    locations.features.map((feature) =>
-      new mapboxgl.Marker()
-        .setLngLat(feature.geometry.coordinates as mapboxgl.LngLatLike)
-        .addTo(map)
-    );
-
-    // Add navigation control (the +/- zoom buttons)
-    map.addControl(new mapboxgl.NavigationControl(), "top-right");
-
-    // Clean up on unmount
-    return () => map.remove();
-  }, []);
-
-  return <div className="map-container" ref={mapContainerRef} />;
+  return (
+    <MapWrapper
+      initialViewState={{
+        longitude: -100,
+        latitude: 40,
+        zoom: 3.5,
+      }}
+      style={{ width: 600, height: 400 }}
+      mapStyle="mapbox://styles/mapbox/streets-v12"
+      mapboxAccessToken={token}
+    >
+      <Marker longitude={-122.4} latitude={37.8} color="red" />
+    </MapWrapper>
+  );
 };
 
 export default Map;
