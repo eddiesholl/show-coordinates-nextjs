@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { Feature } from "geojson";
 
 import { notEmpty } from "@/util";
+import { CoordinatesResponse } from "@/types";
 
 // TODO: extract token
 const token =
@@ -13,14 +14,6 @@ const token =
 // TODO: extract network utils
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-// TODO: Harmonise types
-type Coordinate = {
-  lat: number;
-  long: number;
-};
-type CoordinatesResponse = {
-  coordinates: Coordinate[];
-};
 const Map = () => {
   const { data, error } = useSWR<CoordinatesResponse>(
     "/api/coordinates",

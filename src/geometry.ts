@@ -1,7 +1,5 @@
-export type Coordinate = {
-  lat: number;
-  long: number;
-};
+import { Coordinate } from "./types";
+
 export type BoundingBox = {
   ne: Coordinate;
   sw: Coordinate;

@@ -1,9 +1,6 @@
-import { BoundingBox, Coordinate, coordinatesInBbox } from "@/geometry";
+import { BoundingBox, coordinatesInBbox } from "@/geometry";
+import { CoordinatesResponse } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-type CoordinatesResponse = {
-  coordinates: Coordinate[];
-};
 
 const bbox: BoundingBox = {
   ne: {
