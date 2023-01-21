@@ -30,17 +30,21 @@ This is a full stack demo app built on next.js, with the goal of showing a set o
 
 With the basic requirements describing a single API endpoint, plus a react client to read from it, the streamlined workflow with next.js felt like a great fit.
 
-| Requirement                                       | Detail                                                                                                            |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Single express API endpoint                       | ✅ Implemented via a next.js handler in `api/coordinates.ts`, so it's a thin wrapper on top of an express request |
-| Generates a number of random geometry coordinates | ✅ The endpoint returns an array of random coordinate objects                                                     |
-| Points are within a bounding box                  | ✅                                                                                                                |
-| Simple react client                               | ✅ React pages and components built via next.js conventions                                                       |
-| Code is clear and documented                      | -                                                                                                                 |
-| Code is well tested                               | -                                                                                                                 |
+| Requirement                                       | Detail                                                                                                                                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Single express API endpoint                       | ✅ Implemented via a next.js handler in `api/coordinates.ts`, so it's a thin wrapper on top of an express request                                                               |
+| Generates a number of random geometry coordinates | ✅ The endpoint returns an array of random coordinate objects                                                                                                                   |
+| Points are within a bounding box                  | ✅                                                                                                                                                                              |
+| Simple react client                               | ✅ React pages and components built via next.js conventions                                                                                                                     |
+| Code is clear and documented                      | -                                                                                                                                                                               |
+| Code is well tested                               | ✅ Includes server side test for coordinate generation, and calling an API method. Includes a client side test for rendering the Map component, with a mocked mapbox instance - |
 
 ### Location and data formats
 
 A mapping client API like `mapbox` is likely to work most easily with commonly used data formats, like `geoJSON`. I initially started with the API endpoint returning a `FeatureCollection`, but these particular requirements specifically ask for a simpler format to be used for the locations they return.
 
 Once this has been translated to `geoJSON` on the client, it makes it easier to call on other tools in the ecosystem, like `@turf/bbox`
+
+## Known issues
+
+After messing around for a while, the `mapbox` instance is not fully and cleanly mocked when the `Map` component is rendered in a test. Some options are to mock one layer higher up, at the `react-map-gl` dependency level, or to yank a copy of a full mapbox [mock](https://github.com/visgl/react-map-gl/tree/master/test/src/utils/mapbox-gl-mock)
