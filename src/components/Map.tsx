@@ -6,11 +6,9 @@ import { Feature } from "geojson";
 
 import { notEmpty } from "@/util";
 import { CoordinatesResponse } from "@/types";
+import { fetcher } from "@/network";
 
 const token = process.env.MAPBOX_TOKEN;
-
-// TODO: extract network utils
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Map = () => {
   const { data, error } = useSWR<CoordinatesResponse>(
