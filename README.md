@@ -34,19 +34,11 @@ To run the tests:
 npm run test
 ```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
 ## Background
 
-This is a full stack demo app built on next.js, with the goal of showing a set of coordinates in a map, displayed in a simple react web client.
+This is a full stack demo app built on [Next.js](https://nextjs.org), with the goal of showing a set of coordinates in a map, displayed in a simple react web client.
 
-With the basic requirements describing a single API endpoint, plus a react client to read from it, the streamlined workflow with next.js felt like a great fit.
+With the basic requirements describing a single API endpoint, plus a react client to read from it, the streamlined workflow with Next.js felt like a great fit, to get things moving quickly.
 
 | Requirement                                       | Detail                                                                                                                                                                          |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,14 +46,14 @@ With the basic requirements describing a single API endpoint, plus a react clien
 | Generates a number of random geometry coordinates | ✅ The endpoint returns an array of random coordinate objects                                                                                                                   |
 | Points are within a bounding box                  | ✅                                                                                                                                                                              |
 | Simple react client                               | ✅ React pages and components built via next.js conventions                                                                                                                     |
-| Code is clear and documented                      | -                                                                                                                                                                               |
+| Code is clear and documented                      | ✅                                                                                                                                                                              |
 | Code is well tested                               | ✅ Includes server side test for coordinate generation, and calling an API method. Includes a client side test for rendering the Map component, with a mocked mapbox instance - |
 
 ### Location and data formats
 
-A mapping client API like `mapbox` is likely to work most easily with commonly used data formats, like `geoJSON`. I initially started with the API endpoint returning a `FeatureCollection`, but these particular requirements specifically ask for a simpler format to be used for the locations they return.
+A mapping UI library like `mapbox` is likely to work most easily with commonly used data formats, like `geoJSON`. I initially started with the API endpoint returning a `FeatureCollection`, but these particular requirements specifically ask for a simpler format to be used for the locations they return.
 
-Once this has been translated to `geoJSON` on the client, it makes it easier to call on other tools in the ecosystem, like `@turf/bbox`
+Once the response format has been translated to `geoJSON` on the client, it makes it easier to pass to other tools in the ecosystem, like `@turf/bbox`.
 
 ## System overview
 
@@ -83,7 +75,7 @@ The server aspect is made up of a single REST API endpoint, `GET /api/coordinate
 
 ### Client
 
-The client aspect is a React web app, with a single page. It fetches coordinates from the API endpoint when the page loads (the `Map` component mounts) and renders those coordinates in a basic map view using the `mapbox-gl` NPM dependency. The map view is configured to fit a box around the coordinates, with padding.
+The client aspect is a React web app, with a single page. It fetches coordinates from the API endpoint when the page loads (the `Map` component mounts) and renders those coordinates in a basic map view using the `mapbox-gl` NPM dependency. The map's initial view is configured to fit a box around the coordinates, with padding.
 
 ## Extensions
 
@@ -101,3 +93,7 @@ There's a few things I had in my mind I would have liked to add, or would make t
 After messing around for a while, the `mapbox-gl` instance is not fully and cleanly mocked when the `Map` React component is rendered in a unit test. It generates some runtime error output on the test console. Some options are to mock one layer higher up, at the `react-map-gl` dependency level, or to yank a copy of a full mapbox [mock](https://github.com/visgl/react-map-gl/tree/master/test/src/utils/mapbox-gl-mock)
 
 The function for generating random coordinates can only be tested in a limited way right now. To make sure values are valid, you have to just run the test lots of times. An improvement would be a function that accepts a random number generator. You can then pass in a function for exersizing boundary cases, like a 0 or a 1, and make sure the coordinates generated for these are valid.
+
+There is no bounds checking on the bounding box passed to `coordinatesInBbox`. This would be a useful addition, and would be essential if the bounding box was being passed in via query params.
+
+I didn't get to check the actual JSON response in my API unit test, it requires some more mocking to access it.
