@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createMocks, RequestMethod } from "node-mocks-http";
 
-import handler from "./coordinates";
+import handler from "@/pages/api/coordinates";
+
 function mockRequestResponse(method: RequestMethod = "GET") {
   const { req, res }: { req: NextApiRequest; res: NextApiResponse } =
     createMocks({ method });

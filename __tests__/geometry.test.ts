@@ -1,4 +1,4 @@
-import { BoundingBox, coordinatesInBbox } from "./geometry";
+import { BoundingBox, coordinatesInBbox } from "@/geometry";
 describe("geometry", () => {
   describe("coordinatesInBbox", () => {
     const bounds1: BoundingBox = {
