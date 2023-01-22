@@ -16,6 +16,8 @@ describe("Map", () => {
     };
     fetchMock.once(JSON.stringify(response));
   });
+
+  // Check the dependency is being passed correct config
   it("renders a map", async () => {
     render(<Map />);
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
@@ -30,6 +32,7 @@ describe("Map", () => {
     );
   });
 
+  // Snapshot test to help detect regressions
   it("matches the current snapshot", () => {
     const { container } = render(<Map />);
     expect(container).toMatchSnapshot();

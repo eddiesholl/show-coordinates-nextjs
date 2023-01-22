@@ -1,6 +1,6 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { BoundingBox, coordinatesInBbox } from "@/geometry";
 import { CoordinatesResponse } from "@/types";
-import type { NextApiRequest, NextApiResponse } from "next";
 
 const bbox: BoundingBox = {
   ne: {
@@ -12,6 +12,7 @@ const bbox: BoundingBox = {
     long: 141.47006662831163,
   },
 };
+
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<CoordinatesResponse>
