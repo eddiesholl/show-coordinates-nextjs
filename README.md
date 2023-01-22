@@ -10,6 +10,12 @@ First, install dependencies:
 npm install
 ```
 
+The client token used to talk to `mapbox` is compiled into the React client via an environment variable:
+
+```bash
+export MAPBOX_TOKEN=pk.eyJ1I...
+```
+
 Next, run the development server:
 
 ```bash

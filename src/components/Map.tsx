@@ -7,9 +7,7 @@ import { Feature } from "geojson";
 import { notEmpty } from "@/util";
 import { CoordinatesResponse } from "@/types";
 
-// TODO: extract token
-const token =
-  "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
+const token = process.env.MAPBOX_TOKEN;
 
 // TODO: extract network utils
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
